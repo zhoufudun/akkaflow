@@ -54,7 +54,6 @@ public class Supervisor extends UntypedActor {
 
     @Override
     public void onReceive(Object message) throws Exception {
-
         if (message instanceof Task) {
             router.route(message, getSender());
         } else if (message instanceof Terminated) {
@@ -65,7 +64,7 @@ public class Supervisor extends UntypedActor {
             getContext().watch(actor);
             router = router.addRoutee(new ActorRefRoutee(actor));
         } else {
-            log.error("Unable to handle message {}", message);
+            log.error("Unable to handle message="+message);
         }
     }
 
